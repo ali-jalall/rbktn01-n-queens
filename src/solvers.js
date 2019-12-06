@@ -3,7 +3,6 @@
   / __|/ _ \| \ \ / / _ \ '__/ __|
   \__ \ (_) | |\ V /  __/ |  \__ \
   |___/\___/|_| \_/ \___|_|  |___/
-
 */
 
 // hint: you'll need to do a full-search of all possible arrangements of pieces!
@@ -16,35 +15,15 @@
 
 
 window.findNRooksSolution = function(n) {
-  var newChess = new Board({n: n});
-  var solution = newChess;
-  newChess.attributes[0][0] = 1;
-  var cunt = 1;
+  var solution = undefined; 
 
-
-  for (var i = 0; i < n; i++) {
-    for (var j = 0; j < n; j++) {
-      if (newChess.attributes[i][j] === 0) {
-        newChess.attributes[i][j] = 1;
-        if (newChess.hasAnyRowConflicts() || newChess.hasAnyColConflicts()) {
-          newChess.attributes[i][j] = 0;
-        } else {
-          cunt++;
-        }
-        if (cunt === n) {
-          break;
-        }
-      }
-    }
-  }
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
-  return solution.rows();
+  return solution;
 };
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  
-
+  var solutionCount = undefined; //fixme
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
