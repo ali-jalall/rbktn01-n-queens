@@ -10,20 +10,50 @@
 // take a look at solversSpec.js to see what the tests are expecting
 
 
-// return a matrix (an array of arrays) representing a single nxn chessboard, with n rooks placed such that none of them can attack each other
+// return a matrix (an array of arrays) representing a single nxn chessboard, 
+// with n rooks placed such that none of them can attack each other
 
 
 
 window.findNRooksSolution = function(n) {
-  var solution = undefined; 
-
-  console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
-  return solution;
+  // let instence = new window.Board;
+  // let solution = 0;
+  // this.console.log('fsdfsdfsd', instence.rows)
+  // for (let i = 0; i < instence.rows().length; i++) {
+  //   if (!instence.hasColConflictAt(i) || !instence.hasRowConflictAt(i)) {
+  //     solution++;
+  //   }
+  // }
+  // console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
+  // return solution;
 };
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  var solutionCount = undefined; //fixme
+  var solutionCount = 0;
+  var board = new Board({n:n});
+
+  
+  var findSolution = function (rowsLeft) {
+    var row = n - rowsLeft;
+
+    if ( rowsLeft === 0 ) {
+      solutionCount++;
+      return;
+    }
+
+    for (var i = 0; i < n; i++) {
+      board.togglePiece(row, i);
+
+      if (!board.hasAnyRooksConflicts()) {
+        findSolution(rowsLeft - 1);
+      }
+
+      board.togglePiece(row, i);
+    }
+  }
+
+  findSolution(n);
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
